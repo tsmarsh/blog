@@ -1,0 +1,11 @@
+# Site settings
+title: TailoredShapes
+email: tmarsh@tailoredshapes.com
+description: 
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://tailoredshapes.com" # the base hostname & protocol for your site
+twitter_username: tsmarsh
+github_username:  tsmarsh
+
+# Build settings
+markdown: kramdown
