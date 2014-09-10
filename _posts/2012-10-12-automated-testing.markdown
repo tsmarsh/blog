@@ -3,7 +3,7 @@ layout: post
 title: "Automated Testing"
 date: 2012-10-12 19:01
 comments: true
-categories: QA, Development, TDD
+categories: QA Development TDD
 ---
 
 I was introduced to Unit Testing back in 2007 on my first agile gig. At that point

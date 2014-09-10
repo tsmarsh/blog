@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Agile engagement anti patterns"
+title: "Agile Engagement Anti-Patterns"
 date: 2012-10-17 12:04
 comments: true
 categories: Agile

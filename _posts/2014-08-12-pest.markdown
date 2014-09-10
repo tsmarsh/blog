@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Pest"
+title: "PEST"
 date: 2013-04-21 09:22
 comments: true
-categories: REST, web
+categories: REST web
 ---
 
 I had a thought.

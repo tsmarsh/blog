@@ -3,7 +3,7 @@ layout: post
 title: "Desk Checking"
 date: 2012-10-10 05:38
 comments: true
-categories: QA, Development
+categories: QA Development
 ---
 
 If there is one practice guaranteed to reduce the number of bugs in a system it is desk checking.

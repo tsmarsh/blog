@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Breaking down the 10x developer myth"
+title: "Breaking Down the 10x Developer Myth"
 date: 2014-06-25 19:33
 comments: true
 categories:
 ---
 
-I took some time earlier this year to write the first [PESTful](http://tailoredshapes.com/blog/2013/04/21/pest/) service: [Inventory Server](https://bitbucket.org/tsmarsh/inventoryserver). This project was weird for me, predominantly because I finished it. 
+I took some time earlier this year to write the first [PESTful](http://tailoredshapes.com/rest/web/2013/04/21/pest.html) service: [Inventory Server](https://bitbucket.org/tsmarsh/inventoryserver). This project was weird for me, predominantly because I finished it. 
 
 <!-- more -->
 
@@ -106,7 +106,7 @@ This is the first project where I tried as hard as I could to be as SOLID as pos
 
 This is fine in a single developer world, but if I had been working in a team it would would have been merge hell from day one. Most of the reason for this was merciless refactoring of interfaces caused by doing that simplest thing that would work followed by the right thing: red - green - refactor, splitting green and refactor into seperate commits. 
 
-This is fine. I also probably wasn't SOLID enough. I didn't create abstractions around my interactions with libraries, partly because I'm not sure how I would with regards to DI and JPA. But I'm not sure I would have been faster in a team. Once I had a design in my head, the time to execute that design was definitely faster than the time it would have taken to explain my desing and then evaluate my co-workers implementation.
+This is fine. I also probably wasn't SOLID enough. I didn't create abstractions around my interactions with libraries, partly because I'm not sure how I would with regards to DI and JPA. But I'm not sure I would have been faster in a team. Once I had a design in my head, the time to execute that design was definitely faster than the time it would have taken to explain my design and then evaluate my co-workers implementation.
 
 ### Solo Working
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Nurture your QA"
+title: "Nurture Your QA"
 date: 2012-10-09 21:13
 comments: true
 categories: [QA]

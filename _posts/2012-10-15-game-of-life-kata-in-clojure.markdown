@@ -3,7 +3,7 @@ layout: post
 title: "Game of Life Kata in Clojure"
 date: 2012-10-15 07:36
 comments: true
-categories:  Development, Clojure
+categories:  Development Clojure
 ---
 
 Being an ex-Guardianista Conway's Game of Life has a special place in my heart. The problem is simple enough that you can express it in 6 or 7 cards and devious enough that two developers rarely come up with the same solution twice. It can be easily test driven and, in Java, the naive approach takes about and hour and a half to complete and usually spans three to five classes. 
