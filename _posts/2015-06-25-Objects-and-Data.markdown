@@ -27,29 +27,28 @@ requirements. The examples are roughly Java/C# style, as static typing
 and single inheritence really help to magnify the problem, and most
 developers are familiar with this style of syntax. 
 
-```
-public class Person {
-    Date dateOfBirth;
-    String firstName;
-    String lastName;
+    public class Person {
+        Date dateOfBirth;
+        String firstName;
+        String lastName;
 
-    public Date age(){
-        return Date.now().minus(dateOfBirth);
+        public Date age(){
+            return Date.now().minus(dateOfBirth);
+        }
+
+        public String fullName(){
+            return firstName + " " + lastName;
+        }
     }
 
-    public String fullName(){
-        return firstName + " " + lastName;
-    }
-}
+    public class DeadPerson extends Person {
+        Date dateOfDeath;
 
-public class DeadPerson extends Person {
-    Date dateOfDeath;
-
-    public Date age(){
-        return dateOfDeath.minus(dateofBirth);
+        public Date age(){
+            return dateOfDeath.minus(dateofBirth);
+        }
     }
-}
-```
+
 
 Here we have a lovely example of the beauty of object orienation. By
 grouping together functions with the data that they're supposed to be
@@ -61,13 +60,13 @@ Wait. What? Some people want their first name, second?
 
 OK!
 
-```
-public class ChinesePerson extends Person {
-    public String fullName(){
-        return lastName + " " + firstName;
+
+    public class ChinesePerson extends Person {
+        public String fullName(){
+            return lastName + " " + firstName;
+        }
     }
-}
-```
+
 
 Excellent, mission accomplished.
 
@@ -75,13 +74,13 @@ Wait? We need to track Dead Chinese people?
 
 OK!
 
-```
-public class DeadChinesePerson extends DeadPerson {
-    public String fullName(){
-        return lastName + " " + firstName;
+
+    public class DeadChinesePerson extends DeadPerson {
+        public String fullName(){
+            return lastName + " " + firstName;
+        }
     }
-}
-```
+
 
 Hmmmm, that is less cool. We now have a bit of Copy-Paste-Modify in
 there. That's ok! I'll just inherit from two objects... oh, I can't do
@@ -105,25 +104,25 @@ Sure, thats easy!
 
 I'll just modify the Person class on it so its Comparable.
 
-```
-public class Person implements Comparable{
-    Date dateOfBirth;
-    String firstName;
-    String lastName;
 
-    public Date age(){
-        return Date.now().minus(dateOfBirth);
+    public class Person implements Comparable{
+        Date dateOfBirth;
+        String firstName;
+        String lastName;
+
+        public Date age(){
+            return Date.now().minus(dateOfBirth);
+        }
+
+        public String fullName(){
+            return firstName + " " + lastName;
+        }
+
+        public int compare(Person b){
+            return age() - b.age();
+        }
     }
 
-    public String fullName(){
-        return firstName + " " + lastName;
-    }
-
-    public int compare(Person b){
-        return age() - b.age();
-    }
-}
-```
 
 Mission accomplished!
 
@@ -155,53 +154,53 @@ the Person. We can have a series of different fullname and comparator
 objects that we can combine in different ways, via dependecy injection,
 at runtime.
 
-```
-public class Person {
-    Date dateOfBirth;
-    String firstName;
-    String lastName;
-    Date dateOfDeath;
-    Person parent1;
-    Person parent2;
-    boolean gender;
-}
 
-public interface Agist {
-    int age(Person p);
-}
-
-public class AgeSinceBirth implements Agist {...}
-public class AgeAtDeath implements Agist { ...}
-public class AgeSinceStartOfFirstYear implements Agist{...}
-public class AgeAtYearofDeath implements Agist{...}
-
-public interface DisplayNamer {
-    String name(Person p);
-}
-
-public class IcelandicNamer implements DisplayNamer {...}
-
-public class CompareByAge implements Comparator{
-    Map<Tuple<Class, Class>, Tuple<Agist, Agist>> agism;
-
-    public CompareByAge(Map<Tuple<Class, Class>, Tuple<Agist, Agist>> agism){
-        this.agism = agism;
+    public class Person {
+        Date dateOfBirth;
+        String firstName;
+        String lastName;
+        Date dateOfDeath;
+        Person parent1;
+        Person parent2;
+        boolean gender;
     }
 
-    public int compare(Person a, Person b){
-        Tuple<Agism, Agism> agers = agism.get(new Tuple(a.class,
-        b.class));
-
-        return agers.first.age(a) - agers.second.age(b);
+    public interface Agist {
+        int age(Person p);
     }
-}
 
-public class KoreanPerson extends Person {}
-public class IcelandicPerson extends Person {}
-public class ChinesePerson extends Person {}
-public class DeadPerson extends Person {}
-public class Dead...
-```
+    public class AgeSinceBirth implements Agist {...}
+    public class AgeAtDeath implements Agist { ...}
+    public class AgeSinceStartOfFirstYear implements Agist{...}
+    public class AgeAtYearofDeath implements Agist{...}
+
+    public interface DisplayNamer {
+        String name(Person p);
+    }
+
+    public class IcelandicNamer implements DisplayNamer {...}
+
+    public class CompareByAge implements Comparator{
+        Map<Tuple<Class, Class>, Tuple<Agist, Agist>> agism;
+
+        public CompareByAge(Map<Tuple<Class, Class>, Tuple<Agist, Agist>> agism){
+            this.agism = agism;
+        }
+
+        public int compare(Person a, Person b){
+            Tuple<Agism, Agism> agers = agism.get(new Tuple(a.class,
+            b.class));
+
+            return agers.first.age(a) - agers.second.age(b);
+        }
+    }
+
+    public class KoreanPerson extends Person {}
+    public class IcelandicPerson extends Person {}
+    public class ChinesePerson extends Person {}
+    public class DeadPerson extends Person {}
+    public class Dead...
+
 
 Okay, so we've got rid of the cut and paste code, thats good, and now
 we just have a bunch of Decorator classes. Never been a huge fan of
@@ -273,41 +272,40 @@ methods before we can start to process.
 
 What happens if we don't have a Person class at all?
 
-```
-public interface Agist {
-    int age(Map<Object> p);
-}
 
-public class AgeSinceBirth implements Agist {...}
-public class AgeAtDeath implements Agist { ...}
-public class AgeSinceStartOfFirstYear implements Agist{...}
-public class AgeAtYearofDeath implements Agist{...}
-
-public interface DisplayNamer {
-    String name(Map<Object> p);
-}
-
-public class IcelandicNamer implements DisplayName {...}
-public class CompareByAge implements Comparator{
-    Map<Tuple<Schema, Schema>, Tuple<Agist, Agist>> agism;
-    SchemaIdentifier magic;
-    
-    public CompareByAge(Map<Tuple<Schema, Schema>,Tuple<Agist,Agist>> agism
-                        SchemaIdentifier magic){
-        this.agism = agism;
-        this.magic = magic;
+    public interface Agist {
+        int age(Map<Object> p);
     }
 
-    public int compare(Map<Object> a, Map<Object> b){
+    public class AgeSinceBirth implements Agist {...}
+    public class AgeAtDeath implements Agist { ...}
+    public class AgeSinceStartOfFirstYear implements Agist{...}
+    public class AgeAtYearofDeath implements Agist{...}
+
+    public interface DisplayNamer {
+        String name(Map<Object> p);
+    }
+
+    public class IcelandicNamer implements DisplayName {...}
+    public class CompareByAge implements Comparator{
+        Map<Tuple<Schema, Schema>, Tuple<Agist, Agist>> agism;
+        SchemaIdentifier magic;
         
-        Tuple<Agism, Agism> agers = agism.get(new Tuple(magic.getSchema(a),
-        magic.getSchema(b)));
+        public CompareByAge(Map<Tuple<Schema, Schema>,Tuple<Agist,Agist>> agism
+                            SchemaIdentifier magic){
+            this.agism = agism;
+            this.magic = magic;
+        }
 
-        return agers.first.age(a) - agers.second.age(b);
+        public int compare(Map<Object> a, Map<Object> b){
+            
+            Tuple<Agism, Agism> agers = agism.get(new Tuple(magic.getSchema(a),
+            magic.getSchema(b)));
+
+            return agers.first.age(a) - agers.second.age(b);
+        }
     }
-}
 
-```
 
 Now if we can get our datastores to output something like JSON, we can
 spend the rest of our happy careers writing code that translates one
