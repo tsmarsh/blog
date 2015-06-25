@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Ew, you got methods in data"
+title: "Ew, you got methods in your data"
 date: 2015-06-25
 comments: true
 categories: [Development]
