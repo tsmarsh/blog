@@ -1,0 +1,243 @@
+---
+layout: post
+title: "10x Developer vs Clojure"
+date: 2015-07-09 19:33
+comments: true
+categories:
+---
+
+At the end of April my neice Alexa came to visit from the UK. I love my neice, but I don't get to see her a whole lot. One of the things I had hoped to do whilst she was here was build some toys on my Micro3D printer. We used TinkerPlay to build a really cool looking toy on my iPad, transfered it to my computer where the estimated print time was 2 hours per piece, and there were 30 pieces.
+
+Now these pieces were small. You could easily fit 6 or 7 into a single print. This was made more obvious by the fact that the MakerBot has a file format just for that purpose. This lead me on a two hour search on the web for a tool that would either convert the MakerBot format into a single STL file or that combines multiple STL into a single STL file, and found nothing.
+
+Looking on various 3D printing forums it looks like people who are good at this sort of thing think nothing of composing the files themselves using 3D Studio Max or Blender. However, getting good at 3D modeling turned out to be really hard, especially as they were really hard to use and required something that i was missing: talent.
+
+So I was left with my only talent: coding.
+
+My initial estimate for taking an STL file and collecting it into a single file was 1 day. I mean, how hard can it be? There must be readers for this common file format, and I spend all day taking lists of things and smooshing them together, this was going to be easy.
+
+Fresh out of a clojure gig, taking N data structures and combining
+them into one sounded like a perfect fit for clojure. Also, I just
+love the language and wanted the chance to work with it on my own
+terms, applying what I had learned at Outpace to what I knew from my
+previous experience.
+
+## Stats
+
+The project ended up being split into two projects.
+
+### STL-CLJ
+
+This is the meat of the project. You provide it with a directory
+filled with stl files that you would like to be grouped together and
+it returns a single stl file, reasonably well packed into a 2D space.
+
+
+Stat                | Value   | Note
+:-------------------|--------:|---------------------------------------------------:
+Age                 | 47 days | 19 active days (40.43%)
+Total Files         | 27      | 
+Total Lines of Code | 10211   | (30104 added, 19893 removed)
+Total Commits       | 94      | (average 4.9 commits per active day, 2.0 per all days)
+Authors             | 1       | (average 94.0 commits per author)
+
+10211 lines of code in 19 days!!
+
+That's 531 lines of code a day! That makes me a 53x developer!!!
+
+Wait, that doesn't make any sense, there is no way I wrote 10211 lines
+of code. I used a lot of STL files in this project until the end they
+were mostly ASCII files that were many kilobytes in length.
+
+Extension  |  Files (%)  |	Lines (%)  |	Lines/file 
+:----------|------------:|------------:|------------:
+clj	       | 8 (29.63%)	 | 499 (4.89%) | 62
+cljc	   | 5 (18.52%)	 | 159 (1.56%) | 31
+md         | 1 (3.70%)	 | 61 (0.60%)  | 61
+stl	       | 10 (37.04%) | 112 (1.10%) | 11
+yml	       | 1 (3.70%)	 | 4 (0.04%)   | 4
+
+OK, so that's 558 lines of code in 19 days, or 30 lines per day. But
+that's just the final figure. There was a great deal of churn as I
+played with a couple of solutions and I pulled out an entire library.
+
+So lets take a look at its stats
+
+### Packager
+
+About two thirds of the way through the project I realized that I had
+no idea what I was doing when it came to laying out the pieces in 2D
+space. I had originally though I could just distribute them across the
+width and then move down a row when I was done.
+
+This turned out to be close to the truth, but far from accurate.
+
+This lead to a deep dive on packing algorithms. Which lead me to write
+packager, which is a naive 2D packing algorithm.
+
+Stat                | Value   | Note
+:-------------------|--------:|---------------------------------------------------:
+Age | 6 days | 6 active days (100.00%)
+Total Files | 16 |
+Total Lines of Code | 523 | (839 added, 316 removed)
+Total Commits | 23  | (average 3.8 commits per active day, 3.8 per all days)
+Authors | 1 | (average 23.0 commits per author)
+
+Now these stats feel closer to the truth... so my ego would like me to
+believe.
+
+523 loc in 6 days puts me at 87 loc per day, or 8.7x developer!
+
+But fair is fair, lets look at the same stats as stl-collector.
+
+Extension  |  Files (%)  |	Lines (%)  |	Lines/file 
+:----------|------------:|------------:|------------:
+clj	       | 6 (37.50%)	 | 166 (31.74%)|	27
+cljc	   | 5 (31.25%)	 | 108 (20.65%)|	21
+md	       | 2 (12.50%)	 | 17 (3.25%)  |     8
+yml	       | 1 (6.25%)	 | 2 (0.38%)   | 	 2
+
+Meh, ok maybe that's no so accurate. 4.5x ok, that's pretty
+respectable. 
+
+Now these projects overlapped, so I get 832 lines of code in 19 days
+or a 4.3x dev.
+
+### Test Coverage
+
+Lets look at test coverage:
+
+ Name                     | Forms Percent  | Lines Percent  
+:-------------------------|---------------:|----------------:
+       stl-collector.core |        29.55 % |        45.45 % 
+  stl-collector.flattener |        65.58 % |       100.00 % 
+     stl-collector.reader |        64.45 % |        90.00 % 
+ stl-collector.transforms |        61.12 % |       100.00 % 
+ stl-collector.writer     |        64.59 % |       100.00 %
+         packager.box     |        66.93 % |       100.00 %
+   packager.container     |        71.72 % |       100.00 %
+ packager.distributor     |        64.53 % |        94.12 %
+       packager.shelf     |        64.51 % |       100.00 %
+
+Wait, what does that even mean? How can I have 100% coverage and only
+65% coverage in the same file?
+
+So clojure is terse, like really, really terse.
+
+<pre>
+(assoc {} :id 5)
+</pre>
+
+is equivalent to
+
+<pre>
+Map<Object, Object> map = new HashMap();
+map.put("id", 5);
+</pre>
+
+actually that's not true
+
+<pre>
+{:id 5}
+</pre>
+
+is the equivalent, and that doesn't even begin to describe the real
+differences in those statements. The Clojure map is both persistent
+and immutable. So, in the first example, I'm not actually modifying
+the empty map, so much as using it as the basis for the map I
+ultimately return. If I had assigned {} to a symbol and used it later
+it would still be {}, unlike map in the Java example, which now
+contains an id. 
+
+But that is beside the point. What I'm hoping to establish is that you
+can get a lot done in a single line Clojure, and that is before we
+factoring macros (code being evaluated as data before it is ultimately
+evaluated at code), which leads to all kinds of weirdness around
+figuring out how much of a line was actually tested, as that line
+might macroexpand out to many, many lines.
+
+But I'm pretty happy with the coverage. Hitting 100% of lines was
+usually enough for me to know that I had exercised all of the branches
+in my code which is really all I wanted.
+
+### So am I still a 6x developer?
+
+Well my stats would have me at 4.3x. Still very respectable, but I
+don't believe it does anyone any favors comparing Java to Clojure,
+line by line. Estimates have Clojure somewhere between 2-10 times more
+efficient for lines characters. Just doubling my performance puts my
+productivity in Clojure 50% over my performance in Java.
+
+But, again, I don't think that is fair.
+
+I just could not have got close to this design in anything like as few
+lines in Java. 
+
+<pre>
+(defn [xs]
+   (reduce (fn [d [k v]] (merge-with conj d {k [v]})) {} xs)))
+</pre>
+
+This function takes something that looks like:
+
+<pre>
+[[:a 5] [:b 6] [:a 3]]
+</pre>
+
+and transform it into:
+
+<pre>
+{:a [5 3]
+ :b [6]}
+</pre>
+
+How do you get close to that in Java? More to the point, how do you
+get close to that in Java and be thread safe?
+
+10x doesn't get close, I suspect it close to 100x. I used this logic a
+fair amount in the course of this exercise, but I only had to write it
+once.
+
+You see, this code doesn't care what the keys or the values of the code
+really are. This will work for any sequence of pairs. So I could use
+it for boxes, shelves and containers alike, and I only had to write
+it once not once for each type, or combination of types.
+
+It was this kind of reuse that really blew my mind during this
+project.
+
+### So was I more productive or not?
+
+Unless I sat down and wrote this again in Java I'm never going to know
+for sure, but I strongly suspect that I was at least *3* times more
+productive in Clojure than Java.
+
+### What does that mean in practical terms?
+
+Would I still be writing this code if I was doing it in Java?
+
+I honestly don't know. What I suspect is that my Java code would
+have not been as reliable, thread safe or as flexible. I strongly
+suspect that I achieved an excellent solution in the same amount of
+time I would have achieved _a solution_ in Java and reaching the same
+level of excellence in Java would have taken at least 3x as long. But
+I would never have done that. A solution is all that is really
+required, its excellence beyond the original brief is just show
+boating.
+
+What is interesting to me is that it is _hard_ to write a crappy
+solution. The strong mathematical foundation of lisp makes my code
+feel more like a formal verification than any code I've written in
+other languages. Once it works, you know it works for pretty much
+anything, and unit tests and schema are the blanket that keep you warm
+as you sleep soundly at night.
+
+This is in stark contrast to other languages in my arsenal.
+Python/Ruby/Javascript _may_ have allowed me to write a solution that
+was equivalent in crappiness to the Java solution in less time (I
+doubt it for the reasons I expressed in the last post). But I
+would never have been able to achieve a solution that was as complete
+and performant. Who cares if the solution is thread safe when your
+language has a GIL?
+
+
