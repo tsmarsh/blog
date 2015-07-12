@@ -6,15 +6,32 @@ comments: true
 categories:
 ---
 
-At the end of April my neice Alexa came to visit from the UK. I love my neice, but I don't get to see her a whole lot. One of the things I had hoped to do whilst she was here was build some toys on my Micro3D printer. We used TinkerPlay to build a really cool looking toy on my iPad, transfered it to my computer where the estimated print time was 2 hours per piece, and there were 30 pieces.
+At the end of April my neice Alexa came to visit from the UK. I love
+my neice, but I don't get to see her a whole lot. One of the things I
+had hoped to do whilst she was here was build some toys on my Micro3D
+printer. We used TinkerPlay to build a really cool looking toy on my
+iPad, transfered it to my computer where the estimated print time was
+2 hours per piece, and there were 30 pieces.
 
-Now these pieces were small. You could easily fit 6 or 7 into a single print. This was made more obvious by the fact that the MakerBot has a file format just for that purpose. This lead me on a two hour search on the web for a tool that would either convert the MakerBot format into a single STL file or that combines multiple STL into a single STL file, and found nothing.
+Now these pieces were small. You could easily fit 6 or 7 into a single
+print. This was made more obvious by the fact that the MakerBot has a
+file format just for that purpose. This lead me on a two hour search
+on the web for a tool that would either convert the MakerBot format
+into a single STL file or that combines multiple STL into a single STL
+file, and found nothing.
 
-Looking on various 3D printing forums it looks like people who are good at this sort of thing think nothing of composing the files themselves using 3D Studio Max or Blender. However, getting good at 3D modeling turned out to be really hard, especially as they were really hard to use and required something that i was missing: talent.
+Looking on various 3D printing forums it looks like people who are
+good at this sort of thing think nothing of composing the files
+themselves using 3D Studio Max or Blender. However, getting good at 3D
+modeling turned out to be really hard, especially as they were really
+hard to use and required something that i was missing: talent.
 
 So I was left with my only talent: coding.
 
-My initial estimate for taking an STL file and collecting it into a single file was 1 day. I mean, how hard can it be? There must be readers for this common file format, and I spend all day taking lists of things and smooshing them together, this was going to be easy.
+My initial estimate for taking an STL file and collecting it into a
+single file was 1 day. I mean, how hard can it be? There must be
+readers for this common file format, and I spend all day taking lists
+of things and smooshing them together, this was going to be easy.
 
 Fresh out of a clojure gig, taking N data structures and combining
 them into one sounded like a perfect fit for clojure. Also, I just
@@ -43,7 +60,8 @@ Authors             | 1       | (average 94.0 commits per author)
 
 10211 lines of code in 19 days!!
 
-That's 531 lines of code a day! That makes me a 53x developer!!!
+That's 531 lines of code a day! That makes me a 53x developer, I new
+Clojure was more productive that Java!!!
 
 Wait, that doesn't make any sense, there is no way I wrote 10211 lines
 of code. I used a lot of STL files in this project until the end they
@@ -61,7 +79,7 @@ OK, so that's 558 lines of code in 19 days, or 30 lines per day. But
 that's just the final figure. There was a great deal of churn as I
 played with a couple of solutions and I pulled out an entire library.
 
-So lets take a look at its stats
+So lets take a look at the stats for that library.
 
 ### Packager
 
@@ -82,6 +100,7 @@ Total Files | 16 |
 Total Lines of Code | 523 | (839 added, 316 removed)
 Total Commits | 23  | (average 3.8 commits per active day, 3.8 per all days)
 Authors | 1 | (average 23.0 commits per author)
+
 
 Now these stats feel closer to the truth... so my ego would like me to
 believe.
@@ -162,16 +181,13 @@ in my code which is really all I wanted.
 
 ### So am I still a 6x developer?
 
-Well my stats would have me at 4.3x. Still very respectable, but I
-don't believe it does anyone any favors comparing Java to Clojure,
-line by line. Estimates have Clojure somewhere between 2-10 times more
-efficient for lines characters. Just doubling my performance puts my
-productivity in Clojure 50% over my performance in Java.
+It would be really convenient if lines of code was a decent metric for
+developer productivity.
 
-But, again, I don't think that is fair.
+My stats would have me at 4.3x. But I don't believe for a second that
+I was 50% less productive in Clojure that Java. 
 
-I just could not have got close to this design in anything like as few
-lines in Java. 
+Take a look at this:
 
 <pre>
 (defn [xs]
@@ -206,6 +222,8 @@ it once not once for each type, or combination of types.
 It was this kind of reuse that really blew my mind during this
 project.
 
+
+
 ### So was I more productive or not?
 
 Unless I sat down and wrote this again in Java I'm never going to know
@@ -219,7 +237,7 @@ Would I still be writing this code if I was doing it in Java?
 I honestly don't know. What I suspect is that my Java code would
 have not been as reliable, thread safe or as flexible. I strongly
 suspect that I achieved an excellent solution in the same amount of
-time I would have achieved _a solution_ in Java and reaching the same
+time I would have achieved _a_ solution in Java and reaching the same
 level of excellence in Java would have taken at least 3x as long. But
 I would never have done that. A solution is all that is really
 required, its excellence beyond the original brief is just show
@@ -234,10 +252,204 @@ as you sleep soundly at night.
 
 This is in stark contrast to other languages in my arsenal.
 Python/Ruby/Javascript _may_ have allowed me to write a solution that
-was equivalent in crappiness to the Java solution in less time (I
+was equivalent in crappiness to the hypothetical Java solution in less time (I
 doubt it for the reasons I expressed in the last post). But I
 would never have been able to achieve a solution that was as complete
 and performant. Who cares if the solution is thread safe when your
 language has a GIL?
 
+It might be worth stating that I originally started this project in
+Python, hoping to take advantage of the numpy-stl library. But
+honestly, it was more hassle than it was worth, and the packing
+algorithms would have been a pain in the arse to reason about.
 
+### So was there anything about Clojure that makes it more productive?
+
+#### Paredit
+
+Perhaps the biggest boon when working with Clojure is paredit mode or
+equivalent. Its the sort of feature that you don't realize you've been
+missing until you go back to a language that can't support it and you
+feel like you are coding in molasses.
+
+#### Real REPL
+
+I've used languages with REPLs in the past and never really understood
+what all the fuss was about. The two main features always seems to be
+API discovery and maybe a bit of complicated debugging as I tried to
+figure out where in the global namespace my classes had been dumped.
+Both of these features were already integral to my workflow in Java
+via the IDE.
+
+In Clojure you *live* in the REPL. It isn't a library that you float
+into to ask a couple of questions, it is you development environment,
+a workshop, a lab. If you are working on server software you start
+your server in your REPL, and then send individual forms to the repl
+until the server is doing what you would like. The same is true for
+client apps as well, where your REPL is either your runtime
+environment for a SeeSaw app, or inside the browser on web client.
+
+The REPL forms a tight relationship with your editor providing
+accurate code completion and refactoring tools.
+
+Clojure's REPL is the first development tool I've used that doesn't
+leave me wishing for IntelliJ.
+
+#### Leiningen
+
+Leiningen is Clojure's equivalent to Maven. It is also about as
+ubiquitous. It is slow to start (you get to pay Clojure's start up
+cost twice), it is incredibly reliable and significantly easier to
+use than Maven (which doesn't say a whole lot). Its main purposes is
+dependency management and final packaging as most builds occur inside
+the repl (which is normally initiated by leiningen). I have never felt
+like it got in my way.
+
+#### Emacs
+
+I am as productive from an ssh session as I am with a full-blown GUI
+IDE. The immediate consequence of that is that I can use tmux if I
+want to remote pair with a shared cursor, and I can still ssh in and
+get my own view of the code, if it is on my pairs machine.
+
+This solution is so good, that even if I'm sitting next to the person
+I am pairing with it is still my preference vs two keyboards and mice
+on the same machine.
+
+So far, I only hit this level of productivity in Emacs with Clojure
+and other lisps, but I'm hopeful that Javascript, Python and maybe
+even Java (unlikely) will follow. 
+
+#### Lisp
+
+When I started learning Lisp I wasn't convinced at all. Now, I spend a
+significant amount of time trawling the internet looking for the
+reasons that Lisp didn't win.
+
+Why did Alan Kay create SmallTalk, when he was an avid fan of Lisp?
+
+Why does Javascript exist when Brendan Eich was bought in to put
+Scheme inside of Netscape?
+
+Why did the JPL abandon Lisp despite a huge number of successful
+projects?
+
+Why did Sony demand that Naughty Dog abandon the tool that made such a
+small team so successful?
+
+With the rise of AI and data science why isn't Lisp the language of
+choice once more?
+
+The more I learn the more questions I have as Lisps appear to be
+freaking awesome.
+
+### So was it all roses?
+
+No. During my time working on this my tweets ranged from the sublime
+to the ridiculous. I think I hit the nail on the head with
+
+<blockquote class="twitter-tweet" lang="en"><p lang="en"
+dir="ltr">Clojure is like a rogue-like. Every time it kicks you in the
+nuts it feels like your fault.</p>&mdash; Tom Marsh (@tsmarsh) <a
+href="https://twitter.com/tsmarsh/status/613159153406767105">June 23,
+2015</a></blockquote> <script async
+src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+And boy does it like to kick you in the nuts.
+
+### Error reporting
+
+I lost 2 hours to this:
+
+<pre>
+(deftest "a test"
+  (testing "some details"
+    (is (= 1 1))))
+</pre>
+
+The _obvious_ mistake is that I passed a string to deftest, when I
+should have passed a symbol. The stack trace, and repl insisted that
+the problem was in my namespace declaration.
+
+I solved these kinds of problems in my own code used Prismatic
+Schema for 'typing' (much more flexible than core.typed), and contracts
+(:pre and :post).
+
+That didn't entirely solve the problem as
+
+### Debugging
+
+You can debug clojure, but it is confusing for my tiny little brain.
+For a start macro expansion means that your code really isn't what you
+think it is, so the code you are stepping through is often surprising,
+secondly, everything is an expression, a multiple expressions to a
+line is the norm. What does step over, step in, step out, mean in
+these instances?
+
+Cursive, a plugin for IntelliJ, comes the closest to getting it right,
+but I still prefer Emacs as it feels lighter and more complete. 
+
+### Start up time
+
+<pre>
+Ran 16 tests containing 33 assertions.
+0 failures, 0 errors.
+
+real	0m11.703s
+user	0m41.000s
+sys	0m1.704s
+</pre>
+
+lein test is so slow that it is essentially unusable especially
+compared to running the tests in the repl.
+
+<pre>
+Ran 16 tests containing 33 assertions.
+0 failures, 0 errors.
+"Elapsed time: 255.829821 msecs"
+
+{:test 16, :pass 33, :fail 0, :error 0, :type :summary}
+</pre>
+
+So whats the problem?
+
+REPL restarts also take 20-30 seconds, so if you do screw up your
+environment you have plenty of time to reflect on what you just did
+wrong... and I screw up a lot. I used to think it was just me, but
+having paired with a lot of Clojurists... its not just me.
+
+It is this start up time that prevents me from using Clojure for
+command line utilities, or building mobile apps. I hope it gets fixed
+soon, but I suspect it is here for a while.
+
+In the mean time, compared to stack traces and error reporting this is
+small potatoes. 
+
+
+## Conclusions
+
+If you have hired me to code, and I'm not using Clojure, you are not
+getting my full potential. But I completely understand why it isn't
+the language du jour.
+
+If clojure was a diet it would be Paleo: only the bits that are good
+for you.
+
+If it was a bike it would be a fixie: the minimum of moving parts,
+somehow harder to ride  and yet faster, safer and easier to maintain
+than a convention geared bike.
+
+It has the learning curve of a musical instrument, unlike other
+languages which are more like humming: the results are sublime with
+constant practice, but embarrassing if all you've ever done is hum. 
+
+And like all of these things, the fact that it is better, even though
+it is harder is why it will never be mainstream. 
+
+Without solid tooling for debugging (which is getting closer in
+Cursive), or decent stack traces (which feel further away than ever) the
+path to enlightenment is too long and bumpy for most dev shops to
+tolerate.
+
+That said, I will be using it on every personal project I can, I'm so
+over humming for a living.
