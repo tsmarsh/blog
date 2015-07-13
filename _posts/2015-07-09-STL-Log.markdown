@@ -33,11 +33,11 @@ single file was 1 day. I mean, how hard can it be? There must be
 readers for this common file format, and I spend all day taking lists
 of things and smooshing them together, this was going to be easy.
 
-Fresh out of a clojure gig, taking N data structures and combining
-them into one sounded like a perfect fit for clojure. Also, I just
+Fresh out of a Clojure gig, taking N data structures and combining
+them into one sounded like a perfect fit for Clojure. Also, I just
 love the language and wanted the chance to work with it on my own
 terms, applying what I had learned at Outpace to what I knew from my
-previous experience.
+previous experience and see how it affected my designs and output.
 
 ## Stats
 
@@ -252,8 +252,8 @@ as you sleep soundly at night.
 
 This is in stark contrast to other languages in my arsenal.
 Python/Ruby/Javascript _may_ have allowed me to write a solution that
-was equivalent in crappiness to the hypothetical Java solution in less time (I
-doubt it for the reasons I expressed in the last post). But I
+was equivalent in crappiness to the hypothetical Java solution in less
+time (I doubt it for the reasons I expressed in the last post). But I
 would never have been able to achieve a solution that was as complete
 and performant. Who cares if the solution is thread safe when your
 language has a GIL?
@@ -428,28 +428,58 @@ small potatoes.
 
 ## Conclusions
 
-If you have hired me to code, and I'm not using Clojure, you are not
-getting my full potential. But I completely understand why it isn't
-the language du jour.
+So how do you measure productivity?
 
-If clojure was a diet it would be Paleo: only the bits that are good
-for you.
+Its a problem that has plagued our industry for decades as developer
+salaries have risen almost as quickly as bug counts.
 
-If it was a bike it would be a fixie: the minimum of moving parts,
-somehow harder to ride  and yet faster, safer and easier to maintain
-than a convention geared bike.
+It would be great if we could leverage lines of code as a metric, life
+would be so much simpler, but it simply doesn't make any sense at all.
 
-It has the learning curve of a musical instrument, unlike other
-languages which are more like humming: the results are sublime with
-constant practice, but embarrassing if all you've ever done is hum. 
+So now we're left with this really queezy situation where I am telling
+you that my solution is better than a hypothetical solution in other
+languages.
 
-And like all of these things, the fact that it is better, even though
-it is harder is why it will never be mainstream. 
+It has many features that point to 'goodness':
 
-Without solid tooling for debugging (which is getting closer in
-Cursive), or decent stack traces (which feel further away than ever) the
-path to enlightenment is too long and bumpy for most dev shops to
-tolerate.
+* Immutable objects
+* Pure functions
+* Use of data structures over objects
+* Terse. The less code you write, the less bugs.
 
-That said, I will be using it on every personal project I can, I'm so
-over humming for a living.
+But I'm not leveraging those features for multithreading, as the
+problem isn't especially parallel. What should be parallel? Reading
+from the single file system? Adding objects to the single container?
+
+I could make assertions about the number of bugs, except I can't. I
+honestly don't have that much faith that this software is any more
+reliable than an equivalently tested Java application. And I did
+_need_ those tests. They did catch bugs. There was nothing about the
+language that protected me from them. The classes of bugs that I need
+the tests for was different, the majority of the problems were because
+Lisps are so flexible.
+
+Passing the _wrong_ value into a function can only be observed as a
+problem once the output is considered to be incorrect. They aren't
+collected as compilation failures. Even with the introduction of
+Prismatic Schema, you still need unit tests, if only to make sure that
+Prismatic Schema has checked that each method call obeys the schema.
+
+But it also has features that are not great:
+
+* Slow start up time
+* Probably 'slower to market' than a Python / Ruby solution
+* Probably slower than a numpy solution as Java/Clojure is not great at matrix
+  mathematics, although I have used a library which would allow users
+  to plug in a fast matrix back-end (core.matrix).
+* Requires contributors to be familiar with functional programming at
+  a minimum and probably Clojure which at best as a 1% of developers
+  familiar with it.
+
+So I'm left looking at a solution that I'm very happy with, that I
+feel I completed in a reasonable amount of time, that has shapes that
+make me feel like I did a good job and I have almost no way of proving
+it... except to release it to all of you lot and see why you hate it.
+
+* [stl-clj](https://github.com/tsmarsh/stl-clj)
+* [packager](https://github.com/tsmarsh/packager)
