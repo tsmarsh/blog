@@ -1,7 +1,18 @@
+---
+layout: post
+title: "Minimalism"
+date: 2016-04-15 09:00
+comments: true
+categories: [dev]
+---
+
 I realized a couple of days ago that I only had two applications open:
+
 * A terminal - I use iTerm on OSX, but any 256 color terminal is fine
 * A browser - I use Chrome, mostly because it works well on Linux, OSX
   and Windows. 
+
+<!-- more -->
 
 These two applications now cover 100% of my computing needs.
 
@@ -18,8 +29,7 @@ These two applications now cover 100% of my computing needs.
 * tmux
   * Pairing (close to 0 lag, no compression artifacts)
   * Session keep alive
-* Vi(m)
-  * When emacs isn't installed
+* Vi(m) (When emacs isn't installed)
 
 # Browser
 * Slack / Hipchat 
@@ -49,15 +59,26 @@ on Windows.
 *Text:* Every thing is better if you can edit it in as a text file. You
 get to use Emacs to edit it, you get to use Git for version control,
 you can comfortably work with it over SSH and you can have mobs of
-devs work with you over tmux.
+devs work with you over tmux. And thats just the terminal. Text is the
+founding technology behind the web too.
 
-*Shortcuts:* there is a technology underpinning the shortcuts of shells,
+*Shortcuts:* There is a technology underpinning the shortcuts of shells,
 REPLs, text boxes (on osx... seriously linux, you should get this) and
 a surprising number of web apps called readline. Readline uses, mostly,
 the same shortcuts for navigation as emacs. Learn emacs, and all of a
 sudden you can edit like a pro everywhere.
 
-Mostly, thought there is a feeling of using the right tool. 
+*Pramatism:* As much as I think emacs should be taught a long side
+learning to type, I'm not going to win that argument. If I was
+building a new service (and that is what I do for a living), I'm going
+to target the web and not emacs, although after using the Bloomberg
+Terminal I do wonder if I'm right. The web is a wonderful, lightweight
+way of accessing other peoples services. I could move a lot of what I
+use a browser for into Emacs, perhaps I should for text based things
+like Slack and email, but I probably won't.
+
+Mostly, though there is a feeling of using the right tool. Everything
+is easier. 
 
 Text interfaces might not be pretty and they might be harder at first,
 but you really only have to learn them once, and then everything else
