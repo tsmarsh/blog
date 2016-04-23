@@ -1,3 +1,5 @@
+ [![Build Status](https://travis-ci.org/tsmarsh/tailoredshapes.com.svg?branch=master)](https://travis-ci.org/tsmarsh/tailoredshapes.com)
+
 # README #
 
 My jekyll blog.
