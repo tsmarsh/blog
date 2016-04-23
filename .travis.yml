@@ -6,7 +6,7 @@ deploy:
   secret_access_key:
     secure: OP70OQ4AGPHXSStCNTKXp+SsDqorLVTie1TOzZpmHxfZ6YfkHpyc7v3lL95XjGk9LjkgmOZrg3FjL6tfMpJgs9YQRTKwjgkl5F1/0FTSIBVRPLpkd6MpjNTX40hL+7oMmq/XywBaX2x1sRUvrqI9gGcRjugKxiNgjuMd/rViNiupvpbJOPdmiqdmeg3Bd7FF5ovyaMwrLWEiN9+5xqsFxbpmIICpPRMHdcSG693nO0HmYDfUsOv14WS7EV2J697YSQ3a/NDy10L2TdfR/R5dRMQqnX7bKxqeiFtsF+2xkGUa1fbNWkMSp/2SC5PcD7RqufcufnBMuWIc1qo7Q4NNTK7MWQLQMkD8Cy5ehArlYcRoeVdOfUfNk7zEWDITdpie6FYZjZy+OXF8b7Q/lpitk4wToTehVgjUrZLWfpgtxBzYEJ5SmMxud7V/MexUAAUbdaP0R2qyS9i6fvm6jZkQTxUjBzY1ZwUB0ROp1tS5Y6aoH5hIW/VP8nF/7KhkJHNsEFrX3ZmsihvjRxxcpJfTqes6KbNG1STxJK5tbBq0/7Vn124Stxzfwo2RlkcweBWA8OBWbmNW8LIwrAgZNXj3vLngdlc0+E8xyJFn5sCKvOxzMvvb/ytCeB6sS3/msY68bnLCHQLogS9sHyt2Mh5EfziUlV6467G7mgvoXcANRRc=
   bucket: tailoredshapes.com
-  local-dir: "./_site"
+  local-dir: _site
   acl: public_read
   on:
     repo: tsmarsh/tailoredshapes.com
