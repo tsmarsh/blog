@@ -1,0 +1,11 @@
+language: ruby
+script: "./script/cibuild"
+deploy:
+  provider: s3
+  access_key_id: AKIAJJB2YLSNKWJN2VFQ
+  secret_access_key:
+    secure: MmgnksvJbT9AAw97V9yWOFelq8Wv39gKeXP6bhap2s+b/F58NjiYaTwvcvyuZVAfh4OQHkup0F4v96WwNSlYfkT7XPQyrsrWV/yJjfq3Sd7OhdLKVfLzydxzy9jIQqUltAWQ5cuYzDYiFwcI6rDVKs+VRrO0kGgPjU3puN4auKMsDC5q3bvVIEdMMUkuPQsRjHELE21Nfayf4aiDy/qF4KjnfEN7AZJHNSg+LO2dPGAXollREjuPr5UfiLkpoDnflQkfsZjKaKdSnucO7dXxEz/t/KDOxUQ4jrwJVUutbUYd3nTpgVKS3h5gMfBx5e/Q3G7mRmyFjf2bPel+4GnX398P4pThCehuQ7qpWi5NOmLkfjsVzmW4hJaj0Wa/LWRwcDaKMTKMgN031by7CqK8nqEbWDq+0S4+vr3PUwI9iFGgZ2I9uYQmgDYKe4xDQLqGKmEDD9P/ht6ELbwTLiSvedz9mLtoEdNmW1TVHC1/m5bHqjosCNYYM/IPV4E0HU4g3yTJeSyU/s3VnRnXDCeGbGRnOzW/WbzJe4flv3USONTsmQnLOQoTAsIA7H0XmTOtszFaj7/Mxn5OW0ykYeswjvlYRzv3ocoBc9eCM3RxEhRDhszkfH30rKzzMYVl6cXnuKyW2BRqea3aYYf0U62lAWFwjtBRt5a15bHSo8CC/zc=
+  bucket: tailoredshapes.com
+  skip_cleanup: true
+  acl: public_read
+  local_dir: _site
