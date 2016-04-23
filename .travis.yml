@@ -1,5 +1,4 @@
 language: ruby
-cache: bundler
 
 script: "./script/cibuild"
 deploy:
