@@ -6,6 +6,7 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://tailoredshapes.com" # the base hostname & protocol for your site
 twitter_username: tsmarsh
 github_username:  tsmarsh
-exclude: vendor
+exclude:
+  - vendor
 # Build settings
 markdown: kramdown
