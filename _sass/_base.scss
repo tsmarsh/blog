@@ -201,3 +201,15 @@ pre {
         }
     }
 }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    background-color: lightblue;
+}
+table, tr, td, th{
+    border: solid black 1px;
+}
