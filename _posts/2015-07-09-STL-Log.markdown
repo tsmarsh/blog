@@ -143,22 +143,25 @@ Wait, what does that even mean? How can I have 100% coverage and only
 
 So clojure is terse, like really, really terse.
 
-<pre>
+~~~
 (assoc {} :id 5)
-</pre>
+~~~
+{: .language-clojure}
 
 is equivalent to
 
-<pre>
+~~~
 Map<Object, Object> map = new HashMap();
 map.put("id", 5);
-</pre>
+~~~
+{: .language-java}
 
 actually that's not true
 
-<pre>
+~~~
 {:id 5}
-</pre>
+~~~
+{: .language-clojure}
 
 is the equivalent, and that doesn't even begin to describe the real
 differences in those statements. The Clojure map is both persistent
@@ -189,23 +192,26 @@ I was 50% less productive in Clojure that Java.
 
 Take a look at this:
 
-<pre>
+~~~
 (defn [xs]
    (reduce (fn [d [k v]] (merge-with conj d {k [v]})) {} xs)))
-</pre>
+~~~
+{: .language-clojure}
 
 This function takes something that looks like:
 
-<pre>
+~~~
 [[:a 5] [:b 6] [:a 3]]
-</pre>
+~~~
+{: .language-clojure}
 
 and transform it into:
 
-<pre>
+~~~
 {:a [5 3]
  :b [6]}
-</pre>
+~~~
+{: .language-clojure}
 
 How do you get close to that in Java? More to the point, how do you
 get close to that in Java and be thread safe?
@@ -361,11 +367,12 @@ And boy does it like to kick you in the nuts.
 
 I lost 2 hours to this:
 
-<pre>
+~~~
 (deftest "a test"
   (testing "some details"
     (is (= 1 1))))
-</pre>
+~~~
+{: .language-clojure}
 
 The _obvious_ mistake is that I passed a string to deftest, when I
 should have passed a symbol. The stack trace, and repl insisted that
@@ -391,25 +398,27 @@ but I still prefer Emacs as it feels lighter and more complete.
 
 ### Start up time
 
-<pre>
+~~~
 Ran 16 tests containing 33 assertions.
 0 failures, 0 errors.
 
 real	0m11.703s
 user	0m41.000s
 sys	0m1.704s
-</pre>
+~~~
+{: .language-shell}
 
 lein test is so slow that it is essentially unusable especially
 compared to running the tests in the repl.
 
-<pre>
+~~~
 Ran 16 tests containing 33 assertions.
 0 failures, 0 errors.
 "Elapsed time: 255.829821 msecs"
 
 {:test 16, :pass 33, :fail 0, :error 0, :type :summary}
-</pre>
+~~~
+{: .language-shell}
 
 So whats the problem?
 
