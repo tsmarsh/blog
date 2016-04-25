@@ -6,6 +6,10 @@ comments: true
 categories: [dev]
 ---
 
+I've been working in somewhat distributed teams for a little over a
+year now. I figured I'd write down some of the more successful
+patterns a leave some warnings for things to avoid. 
+
 ## Standup
 
 Distributed standup is really easy, you just use a service like
@@ -84,18 +88,24 @@ I've come up with a couple of tricks that work well.
 For small sketches where you are desperately reaching for a
 whiteboard, draw on on paper, take a picture and share with the room.
 You can then choose to print it out, or edit it, or just recreate with
-paper and send back. Its a process that works surprisingly well
+paper and send back. 
+
+Its a process that works surprisingly well.
 
 ### Video Whiteboard
 
 Use a webcam, which can be the one in your laptop, and have a stream
 of you drawing on a whiteboard. Relies on everyone having a
-whiteboard. Honestly, if you are working from home I'd seriously
+whiteboard. 
+
+Honestly, if you are working from home I'd seriously
 consider making sure everyone has access to a whiteboard. 
 
 ### Online Whiteboards
 
-Almost universally bad. Avoid. 
+Universally bad. Avoid. There is something about these apps that is so
+much harder that pen on paper that they stifle all creativity (once
+people stop drawing penises). 
 
 ## Pairing
 
