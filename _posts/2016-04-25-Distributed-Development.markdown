@@ -90,7 +90,7 @@ whiteboard, draw on on paper, take a picture and share with the room.
 You can then choose to print it out, or edit it, or just recreate with
 paper and send back. 
 
-Its a process that works surprisingly well.
+It is a process that works surprisingly well.
 
 ### Video Whiteboard
 
