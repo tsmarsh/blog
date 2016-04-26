@@ -13,3 +13,4 @@ deploy:
   skip_cleanup: true
   on:
     repo: tsmarsh/tailoredshapes.com
+    branch: master
