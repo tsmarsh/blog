@@ -188,10 +188,11 @@ This would at least allow you to see who transferred the photos.
 ### What if the content is modified beyond the capabilities of the identification algorithm?
 
 This is already common on platforms like
-[YouTube](https://youtube.com) which already the contents of
-their servers using identification algorithms. At that point it becomes the
+[YouTube](https://youtube.com) which already monitors the contents of
+their servers using identification algorithms. Policing remainss the
 job of conventional law enforcement and the original content holders,
-much as it is today. 
+much as it is today. But now they have a mechanism for judging if a
+copy is legitimate rather than assuming that all copies are unlawful.
 
 Remember, it is legal, and in many ways encouraged for works of art to
 be inspired by others and it is protected by fair-use. This will
