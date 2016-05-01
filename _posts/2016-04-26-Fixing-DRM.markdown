@@ -189,7 +189,7 @@ This would at least allow you to see who transferred the photos.
 
 This is already common on platforms like
 [YouTube](https://youtube.com) which already monitors the contents of
-their servers using identification algorithms. Policing remainss the
+their servers using identification algorithms. Policing remains the
 job of conventional law enforcement and the original content holders,
 much as it is today. But now they have a mechanism for judging if a
 copy is legitimate rather than assuming that all copies are unlawful.
